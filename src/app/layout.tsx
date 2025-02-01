@@ -4,6 +4,7 @@ import "../css/globals.css";
 import {cn} from "@/lib/utils";
 import ClientProviders from "@/provider/ClientProviders";
 import TopBar from "@/components/common/TopBar";
+import ControlButton from "@/components/common/ControlButton";
 
 const fontSans = FontSans({
     subsets: ['latin'],
@@ -33,6 +34,7 @@ export default function RootLayout({
         <ClientProviders>
             <TopBar/>
             {children}
+            <ControlButton/>
         </ClientProviders>
         </body>
         </html>

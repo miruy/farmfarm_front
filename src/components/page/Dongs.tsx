@@ -26,7 +26,7 @@ const Dongs = () => {
 
     return (
         <div className="flex flex-1 pt-5">
-            <div className="flex flex-col w-full lg:w-1/2 2xl:w-1/3 mx-auto py-5 px-3">
+            <div className="flex flex-col w-full mx-auto py-5 px-4 lg:px-[10%]">
                 <div className="text-center text-2xl font-bold pb-5 tracking-wide">하우스 동</div>
 
                 <Table>

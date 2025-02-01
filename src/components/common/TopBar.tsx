@@ -1,7 +1,7 @@
 'use client';
 
 import {Button} from "@/components/ui/button";
-import {FaChevronLeft} from "react-icons/fa";
+import {FaBars, FaChevronLeft} from "react-icons/fa";
 import {
     Sheet,
     SheetContent,
@@ -28,19 +28,21 @@ const TopBar = () => {
 
     if (!isDongsRoute) {
         return (
-            <div className="flex justify-between items-center p-4 w-full lg:w-1/2 2xl:w-1/3 mx-auto px-3">
+            <div className="flex justify-between items-center p-4 w-full mx-auto">
                 <Button
-                    variant={null}
-                    className="rounded-full p-3 hover:bg-secondary cursor-pointer"
+                    variant="ghost"
+                    className="rounded-md p-3"
                     onClick={handleBack}
                     disabled={!canGoBack}
                 >
-                    <FaChevronLeft size={20}/>
+                    <FaChevronLeft/>
                 </Button>
 
                 <Sheet>
                     <SheetTrigger asChild>
-                        <Button variant="outline">Open</Button>
+                        <Button className="rounded-md p-3" variant="ghost">
+                            <FaBars/>
+                        </Button>
                     </SheetTrigger>
                     <SheetContent className="py-14">
                         <div className="flex flex-col flex-1">
