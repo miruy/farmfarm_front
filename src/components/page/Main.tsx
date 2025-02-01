@@ -11,7 +11,7 @@ const Main = () => {
                     FARMFARM
                 </div>
 
-                <div className="space-y-3">
+                <form className="space-y-3">
                     <div className="space-y-3">
                         <div className="relative">
                             <svg
@@ -43,7 +43,7 @@ const Main = () => {
                     <div className="flex justify-center">
                         <Button type="button" variant="default" className="w-full h-[50px] text-[16px]">로그인</Button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     )
