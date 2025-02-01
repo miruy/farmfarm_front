@@ -22,7 +22,7 @@ const Dong = () => {
     ];
 
     return (
-        <div className="flex flex-1 flex-col pt-28 space-y-5">
+        <div className="flex flex-1 flex-col space-y-5">
             <div className="flex">
                 <div className="flex flex-col w-full lg:w-1/2 2xl:w-1/3 mx-auto py-5 px-3">
                     <div className="text-center text-2xl font-bold pb-5 tracking-wide">센서</div>

@@ -5,7 +5,7 @@ import {Button} from "@/components/ui/button";
 
 const Main = () => {
     return (
-        <div className="flex flex-1 flex-col justify-center">
+        <div className="flex flex-1 flex-col pt-[81px]">
             <div className="w-full lg:w-1/2 2xl:w-1/3 space-y-5 px-3 mx-auto">
                 <div className="text-center font-black text-[45px]">
                     FARMFARM
