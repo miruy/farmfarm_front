@@ -22,17 +22,6 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export * from './createDongRequest';
-export * from './createHouseRequest';
-export * from './createManagerRequest';
-export * from './createTokenRequest';
-export * from './createTokenRequestGrantType';
-export * from './createTokenResponse';
-export * from './getAllDongsResponse';
-export * from './getHouseByIdResponse';
-export * from './houseApiSearchHousesParams';
-export * from './pageRsMeta';
-export * from './pageRsSearchHousesResponse';
-export * from './searchHousesResponse';
-export * from './updateDongRequest';
-export * from './updateHouseRequest';
+export interface UpdateDongRequest {
+  name?: string;
+}

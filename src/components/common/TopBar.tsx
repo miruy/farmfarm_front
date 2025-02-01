@@ -1,25 +1,33 @@
 'use client';
 
-import {Button} from "@/components/ui/button";
-import {FaBars, FaChevronLeft} from "react-icons/fa";
+import {FaBars, FaChevronLeft, FaTimes} from "react-icons/fa";
 import {
-    Sheet,
-    SheetContent,
+    Sheet, SheetClose,
+    SheetContent, SheetTitle,
     SheetTrigger
 } from "@/components/ui/sheet";
-import {usePathname} from "next/navigation";
-import {useEffect, useState} from "react";
+import {usePathname, useRouter} from "next/navigation";
+import {useContext, useEffect, useState} from "react";
+import {AuthContext} from "@/auth/AuthContext";
+import {VisuallyHidden} from "@radix-ui/react-visually-hidden";
 
 const TopBar = () => {
 
     const pathname = usePathname();
     const isDongsRoute = pathname === "/";
     const [canGoBack, setCanGoBack] = useState(false);
+    const {logout} = useContext(AuthContext);
+    const router = useRouter();
 
     const handleBack = () => {
         if (canGoBack) {
             window.history.back();
         }
+    }
+
+    const handleLogout = () => {
+        logout();
+        router.push("/");
     }
 
     useEffect(() => {
@@ -29,24 +37,28 @@ const TopBar = () => {
     if (!isDongsRoute) {
         return (
             <div className="flex justify-between items-center p-4 w-full mx-auto">
-                <Button
-                    variant="ghost"
-                    className="rounded-md p-3"
-                    onClick={handleBack}
-                    disabled={!canGoBack}
-                >
-                    <FaChevronLeft/>
-                </Button>
+                <div onClick={handleBack} className="hover:bg-secondary rounded-md p-3 cursor-pointer">
+                    <FaChevronLeft className="w-5 h-5"/>
+                </div>
 
                 <Sheet>
                     <SheetTrigger asChild>
-                        <Button className="rounded-md p-3" variant="ghost">
-                            <FaBars/>
-                        </Button>
+                        <div className="hover:bg-secondary rounded-md p-3 cursor-pointer">
+                            <FaBars className="w-5 h-5"/>
+                        </div>
                     </SheetTrigger>
-                    <SheetContent className="py-14">
-                        <div className="flex flex-col flex-1">
-                            <div className="flex flex-1 cursor-pointer  hover:bg-secondary rounded-md py-2 px-5">로그아웃
+                    <VisuallyHidden><SheetTitle></SheetTitle></VisuallyHidden>
+                    <SheetContent className="p-4">
+                        <div className="flex justify-end">
+                            <SheetClose className="rounded-md p-3 hover:bg-secondary cursor-pointer">
+                                <FaTimes className="w-5 h-5"/>
+                            </SheetClose>
+                        </div>
+
+                        <div className="flex flex-col flex-1 py-5">
+                            <div
+                                onClick={handleLogout}
+                                className="flex flex-1 cursor-pointer font-semibold hover:bg-secondary rounded-md py-2 px-5">로그아웃
                             </div>
                         </div>
                     </SheetContent>

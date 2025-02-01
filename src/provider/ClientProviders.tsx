@@ -2,6 +2,8 @@
 
 import React, {ReactNode, Suspense} from 'react';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {AuthProvider} from "@/auth/AuthContext";
+import {ToastContainer} from "react-toastify";
 
 interface ClientProvidersProps {
     children: ReactNode;
@@ -22,9 +24,12 @@ const ClientProviders = ({children}: ClientProvidersProps) => {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <Suspense>
-                {children}
-            </Suspense>
+            <ToastContainer/>
+            <AuthProvider>
+                <Suspense>
+                    {children}
+                </Suspense>
+            </AuthProvider>
         </QueryClientProvider>
     );
 };
