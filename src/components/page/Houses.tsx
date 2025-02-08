@@ -7,34 +7,26 @@ import {
     TableRow
 } from "@/components/ui/table";
 import {useRouter} from "next/navigation";
-import {useHouseApiGetAllDongs, useHouseApiGetHouseById} from "@/openapi/api/house/house";
-import Loading from "@/app/loading";
 import NotFound from "@/app/not-found";
+import Loading from "@/app/loading";
+import {useHouseApiSearchHouses} from "@/openapi/api/house/house";
 
-const Dongs = ({houseId}: { houseId: string }) => {
+const Houses = () => {
 
     const router = useRouter();
 
     const {
-        data: house
-    } = useHouseApiGetHouseById(houseId, {
-        query: {
-            queryKey: ['SearchHouse'],
-        },
-    });
-
-    const {
-        data: dongs,
+        data: houses,
         isLoading: isLoading,
         isError: isError,
-    } = useHouseApiGetAllDongs(houseId, {
+    } = useHouseApiSearchHouses({page: 0, pageSize: 10}, {
         query: {
-            queryKey: ['SearchDongs'],
+            queryKey: ['SearchHouses'],
         },
     });
 
-    const handleDongDetail = (dongId: string) => {
-        router.push(`/houses/${houseId}/dongs/${dongId}/`)
+    const handleHouseDetail = (hosueId: string) => {
+        router.push(`/houses/${hosueId}/dongs`)
     }
 
     if (isLoading) {
@@ -48,16 +40,16 @@ const Dongs = ({houseId}: { houseId: string }) => {
     return (
         <div className="flex flex-1 pt-5">
             <div className="flex flex-col w-full mx-auto py-5 px-4 lg:px-[10%]">
-                <div className="text-center text-2xl font-bold pb-5 tracking-wide">{house?.name}</div>
+                <div className="text-center text-2xl font-bold pb-5 tracking-wide">하우스</div>
 
                 <Table>
                     <TableBody className="cursor-default">
-                        {dongs?.map((dong, index) => (
+                        {houses?.data?.map((house, index) => (
                             <TableRow
                                 key={index}
                                 className="flex justify-center cursor-pointer"
-                                onClick={() => handleDongDetail(dong.id!)}>
-                                <TableCell className="font-medium">{dong.name}</TableCell>
+                                onClick={() => handleHouseDetail(house.id!)}>
+                                <TableCell className="font-medium">{house.name}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -67,4 +59,4 @@ const Dongs = ({houseId}: { houseId: string }) => {
     )
 }
 
-export default Dongs;
+export default Houses;

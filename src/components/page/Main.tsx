@@ -11,7 +11,7 @@ export default function Main() {
 
     useEffect(() => {
         if (isLoggedIn) {
-            router.push("/dongs");
+            router.push("/houses");
         } else {
             router.push("/login");
         }

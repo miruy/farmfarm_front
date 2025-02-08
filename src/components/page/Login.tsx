@@ -32,7 +32,7 @@ const Login = () => {
                     className: "text-sm",
                     theme: "colored",
                 });
-                router.push(`/dongs`);
+                router.push(`/houses`);
             },
             onError: (error) => {
                 console.log(error);

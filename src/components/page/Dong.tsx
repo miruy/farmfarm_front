@@ -39,7 +39,7 @@ const Dong = () => {
         <div className="flex flex-1 flex-col px-4 lg:flex-row xl:space-x-10 xl:px-[5%]">
             <div className="lg:w-[70%]">
                 <div className="flex flex-col w-full mx-auto py-5">
-                    <div className="text-center text-2xl font-bold pb-5 tracking-wide">센서</div>
+                    <div className="text-center text-3xl font-bold pb-5 tracking-wide">센서</div>
 
                     <Table>
                         <TableBody className="cursor-default">
@@ -56,8 +56,8 @@ const Dong = () => {
                     </Table>
                 </div>
 
-                <div className="flex flex-col w-full mx-auto py-5">
-                    <div className="text-center text-2xl font-bold tracking-wide">CCTV</div>
+                <div className="flex flex-col w-full mx-auto pt-10 pb-5">
+                    <div className="text-center text-3xl font-bold tracking-wide">CCTV</div>
 
                     {cctvs.map((cctv, index) => (
                         <div key={index} className="flex flex-col py-5 space-y-2">
