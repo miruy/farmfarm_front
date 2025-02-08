@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/sheet";
 import {usePathname, useRouter} from "next/navigation";
 import {useContext, useEffect, useState} from "react";
-import {AuthContext} from "@/auth/AuthContext";
+import {AuthContext} from "@/context/AuthContext";
 import {VisuallyHidden} from "@radix-ui/react-visually-hidden";
 
 const TopBar = () => {

@@ -2,7 +2,7 @@
 
 import {useRouter} from "next/navigation";
 import {useContext} from "react";
-import {AuthContext} from "@/auth/AuthContext";
+import {AuthContext} from "@/context/AuthContext";
 import {useForm} from "react-hook-form";
 import {CreateTokenRequest} from "@/openapi/model";
 import {useAuthApiCreateToken} from "@/openapi/api/auth/auth";

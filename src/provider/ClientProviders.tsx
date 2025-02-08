@@ -2,8 +2,10 @@
 
 import React, {ReactNode, Suspense} from 'react';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {AuthProvider} from "@/auth/AuthContext";
+import {AuthProvider} from "@/context/AuthContext";
 import {ToastContainer} from "react-toastify";
+import {ModalProvider} from "@/context/ModalContext";
+import Loading from "@/app/loading";
 
 interface ClientProvidersProps {
     children: ReactNode;
@@ -26,9 +28,11 @@ const ClientProviders = ({children}: ClientProvidersProps) => {
         <QueryClientProvider client={queryClient}>
             <ToastContainer/>
             <AuthProvider>
-                <Suspense>
-                    {children}
-                </Suspense>
+                <ModalProvider>
+                    <Suspense fallback={<Loading/>}>
+                        {children}
+                    </Suspense>
+                </ModalProvider>
             </AuthProvider>
         </QueryClientProvider>
     );
