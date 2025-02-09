@@ -29,15 +29,13 @@
 
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateDeviceRequestType } from './updateDeviceRequestType';
+import type { GetAllDongDevicesResponseDeviceConfigKey } from './getAllDongDevicesResponseDeviceConfigKey';
 
-export interface UpdateDeviceRequest {
-  name?: string;
-  /** 장치 종류
-
-- DT001: 릴레이
-- DT002: 센서
-- DT003: CCTV
+export interface GetAllDongDevicesResponseDeviceConfig {
+  id?: string;
+  /** 장치 설정 키
+- DK001: URL
  */
-  type?: UpdateDeviceRequestType;
+  key?: GetAllDongDevicesResponseDeviceConfigKey;
+  value?: string;
 }

@@ -23,11 +23,24 @@
 - ERROR_1010: 동 장치를 찾을 수 없습니다.
 - ERROR_1011: 이미 하우스에 포함된 장치입니다.
 - ERROR_1012: 하우스 장치를 찾을 수 없습니다.
+- ERROR_1013: 장치 기능을 찾을 수 없습니다.
+- ERROR_1014: 이미 등록된 장치 설정 키입니다.
+- ERROR_1015: 장치 설정을 찾을 수 없습니다.
 
  * OpenAPI spec version: 1.0.0
  */
+import type { GetAllDongDevicesResponseDeviceType } from './getAllDongDevicesResponseDeviceType';
+import type { GetAllDongDevicesResponseDeviceFunction } from './getAllDongDevicesResponseDeviceFunction';
 
 export interface GetAllDongDevicesResponseDevice {
   id?: string;
   name?: string;
+  /** 장치 종류
+
+- DT001: 릴레이
+- DT002: 센서
+- DT003: CCTV
+ */
+  type?: GetAllDongDevicesResponseDeviceType;
+  functions?: GetAllDongDevicesResponseDeviceFunction[];
 }

@@ -23,10 +23,18 @@
 - ERROR_1010: 동 장치를 찾을 수 없습니다.
 - ERROR_1011: 이미 하우스에 포함된 장치입니다.
 - ERROR_1012: 하우스 장치를 찾을 수 없습니다.
+- ERROR_1013: 장치 기능을 찾을 수 없습니다.
+- ERROR_1014: 이미 등록된 장치 설정 키입니다.
+- ERROR_1015: 장치 설정을 찾을 수 없습니다.
 
  * OpenAPI spec version: 1.0.0
  */
 
+export * from './createDeviceConfigRequest';
+export * from './createDeviceConfigRequestKey';
+export * from './createDeviceFunctionRequest';
+export * from './createDeviceFunctionRequestProtocol';
+export * from './createDeviceFunctionRequestType';
 export * from './createDeviceRequest';
 export * from './createDeviceRequestType';
 export * from './createDongDeviceRequest';
@@ -39,8 +47,19 @@ export * from './createTokenRequestGrantType';
 export * from './createTokenResponse';
 export * from './deviceApiSearchDevicesParams';
 export * from './dongApiSearchDongsParams';
+export * from './getAllDeviceConfigsResponse';
+export * from './getAllDeviceConfigsResponseKey';
+export * from './getAllDeviceFunctionsResponse';
+export * from './getAllDeviceFunctionsResponseProtocol';
+export * from './getAllDeviceFunctionsResponseType';
 export * from './getAllDongDevicesResponse';
 export * from './getAllDongDevicesResponseDevice';
+export * from './getAllDongDevicesResponseDeviceConfig';
+export * from './getAllDongDevicesResponseDeviceConfigKey';
+export * from './getAllDongDevicesResponseDeviceFunction';
+export * from './getAllDongDevicesResponseDeviceFunctionProtocol';
+export * from './getAllDongDevicesResponseDeviceFunctionType';
+export * from './getAllDongDevicesResponseDeviceType';
 export * from './getAllHouseDevicesResponse';
 export * from './getAllHouseDevicesResponseDevice';
 export * from './getAllHouseDevicesResponseDeviceType';

@@ -29,15 +29,23 @@
 
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateDeviceRequestType } from './updateDeviceRequestType';
 
-export interface UpdateDeviceRequest {
-  name?: string;
-  /** 장치 종류
+/**
+ * 통신 규칙
 
-- DT001: 릴레이
-- DT002: 센서
-- DT003: CCTV
+- CP001: MODBUS_RTU
+- CP002: MODBUS_TCP
+- CP003: HTTP
+- CP004: 1-WIRE
+
  */
-  type?: UpdateDeviceRequestType;
-}
+export type CreateDeviceFunctionRequestProtocol = typeof CreateDeviceFunctionRequestProtocol[keyof typeof CreateDeviceFunctionRequestProtocol];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CreateDeviceFunctionRequestProtocol = {
+  CP001: 'CP001',
+  CP002: 'CP002',
+  CP003: 'CP003',
+  CP004: 'CP004',
+} as const;

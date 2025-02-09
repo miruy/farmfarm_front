@@ -23,6 +23,9 @@
 - ERROR_1010: 동 장치를 찾을 수 없습니다.
 - ERROR_1011: 이미 하우스에 포함된 장치입니다.
 - ERROR_1012: 하우스 장치를 찾을 수 없습니다.
+- ERROR_1013: 장치 기능을 찾을 수 없습니다.
+- ERROR_1014: 이미 등록된 장치 설정 키입니다.
+- ERROR_1015: 장치 설정을 찾을 수 없습니다.
 
  * OpenAPI spec version: 1.0.0
  */
@@ -50,8 +53,12 @@ import type {
   UseQueryResult
 } from '@tanstack/react-query'
 import type {
+  CreateDeviceConfigRequest,
+  CreateDeviceFunctionRequest,
   CreateDeviceRequest,
   DeviceApiSearchDevicesParams,
+  GetAllDeviceConfigsResponse,
+  GetAllDeviceFunctionsResponse,
   GetDeviceByIdResponse,
   PageRsSearchDevicesResponse,
   UpdateDeviceRequest
@@ -305,6 +312,511 @@ export const useDeviceApiCreateDevice = <TData = Awaited<ReturnType<typeof devic
       > => {
 
       const mutationOptions = getDeviceApiCreateDeviceMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    /**
+ * @summary 장치 기능 전체 조회
+ */
+export const deviceApiGetAllDeviceFunctions = (
+    deviceId: string,
+ options?: SecondParameter<typeof farmfarmAxiosInstance>,signal?: AbortSignal
+) => {
+      
+      
+      return farmfarmAxiosInstance<GetAllDeviceFunctionsResponse[]>(
+      {url: `/v1/devices/${deviceId}/functions`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+export const getDeviceApiGetAllDeviceFunctionsQueryKey = (deviceId: string,) => {
+    return [`/v1/devices/${deviceId}/functions`] as const;
+    }
+
+    
+export const getDeviceApiGetAllDeviceFunctionsInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>>, TError = ErrorType<unknown>>(deviceId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getDeviceApiGetAllDeviceFunctionsQueryKey(deviceId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>> = ({ signal }) => deviceApiGetAllDeviceFunctions(deviceId, requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(deviceId),  staleTime: 10000,  ...queryOptions} as UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type DeviceApiGetAllDeviceFunctionsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>>
+export type DeviceApiGetAllDeviceFunctionsInfiniteQueryError = ErrorType<unknown>
+
+
+export function useDeviceApiGetAllDeviceFunctionsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>>, TError = ErrorType<unknown>>(
+ deviceId: string, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useDeviceApiGetAllDeviceFunctionsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>>, TError = ErrorType<unknown>>(
+ deviceId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useDeviceApiGetAllDeviceFunctionsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>>, TError = ErrorType<unknown>>(
+ deviceId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 장치 기능 전체 조회
+ */
+
+export function useDeviceApiGetAllDeviceFunctionsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>>, TError = ErrorType<unknown>>(
+ deviceId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getDeviceApiGetAllDeviceFunctionsInfiniteQueryOptions(deviceId,options)
+
+  const query = useInfiniteQuery(queryOptions) as  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+/**
+ * @summary 장치 기능 전체 조회
+ */
+export const prefetchDeviceApiGetAllDeviceFunctionsInfinite = async <TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError = ErrorType<unknown>>(
+ queryClient: QueryClient, deviceId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ): Promise<QueryClient> => {
+
+  const queryOptions = getDeviceApiGetAllDeviceFunctionsInfiniteQueryOptions(deviceId,options)
+
+  await queryClient.prefetchInfiniteQuery(queryOptions);
+
+  return queryClient;
+}
+
+
+export const getDeviceApiGetAllDeviceFunctionsQueryOptions = <TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError = ErrorType<unknown>>(deviceId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getDeviceApiGetAllDeviceFunctionsQueryKey(deviceId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>> = ({ signal }) => deviceApiGetAllDeviceFunctions(deviceId, requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(deviceId),  staleTime: 10000,  ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type DeviceApiGetAllDeviceFunctionsQueryResult = NonNullable<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>>
+export type DeviceApiGetAllDeviceFunctionsQueryError = ErrorType<unknown>
+
+
+export function useDeviceApiGetAllDeviceFunctions<TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError = ErrorType<unknown>>(
+ deviceId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useDeviceApiGetAllDeviceFunctions<TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError = ErrorType<unknown>>(
+ deviceId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useDeviceApiGetAllDeviceFunctions<TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError = ErrorType<unknown>>(
+ deviceId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 장치 기능 전체 조회
+ */
+
+export function useDeviceApiGetAllDeviceFunctions<TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError = ErrorType<unknown>>(
+ deviceId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getDeviceApiGetAllDeviceFunctionsQueryOptions(deviceId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+/**
+ * @summary 장치 기능 전체 조회
+ */
+export const prefetchDeviceApiGetAllDeviceFunctions = async <TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError = ErrorType<unknown>>(
+ queryClient: QueryClient, deviceId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceFunctions>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ): Promise<QueryClient> => {
+
+  const queryOptions = getDeviceApiGetAllDeviceFunctionsQueryOptions(deviceId,options)
+
+  await queryClient.prefetchQuery(queryOptions);
+
+  return queryClient;
+}
+
+
+/**
+ * @summary 장치 기능 생성
+ */
+export const deviceApiCreateDeviceFunction = (
+    deviceId: string,
+    createDeviceFunctionRequest: BodyType<CreateDeviceFunctionRequest>,
+ options?: SecondParameter<typeof farmfarmAxiosInstance>,signal?: AbortSignal
+) => {
+      
+      
+      return farmfarmAxiosInstance<string>(
+      {url: `/v1/devices/${deviceId}/functions`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: createDeviceFunctionRequest, signal
+    },
+      options);
+    }
+  
+
+
+export const getDeviceApiCreateDeviceFunctionMutationOptions = <TData = Awaited<ReturnType<typeof deviceApiCreateDeviceFunction>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{deviceId: string;data: BodyType<CreateDeviceFunctionRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+) => {
+const mutationKey = ['deviceApiCreateDeviceFunction'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deviceApiCreateDeviceFunction>>, {deviceId: string;data: BodyType<CreateDeviceFunctionRequest>}> = (props) => {
+          const {deviceId,data} = props ?? {};
+
+          return  deviceApiCreateDeviceFunction(deviceId,data,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions } as UseMutationOptions<TData, TError,{deviceId: string;data: BodyType<CreateDeviceFunctionRequest>}, TContext>}
+
+    export type DeviceApiCreateDeviceFunctionMutationResult = NonNullable<Awaited<ReturnType<typeof deviceApiCreateDeviceFunction>>>
+    export type DeviceApiCreateDeviceFunctionMutationBody = BodyType<CreateDeviceFunctionRequest>
+    export type DeviceApiCreateDeviceFunctionMutationError = ErrorType<unknown>
+
+    /**
+ * @summary 장치 기능 생성
+ */
+export const useDeviceApiCreateDeviceFunction = <TData = Awaited<ReturnType<typeof deviceApiCreateDeviceFunction>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{deviceId: string;data: BodyType<CreateDeviceFunctionRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+): UseMutationResult<
+        TData,
+        TError,
+        {deviceId: string;data: BodyType<CreateDeviceFunctionRequest>},
+        TContext
+      > => {
+
+      const mutationOptions = getDeviceApiCreateDeviceFunctionMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    /**
+ * @summary 장치 설정 전체 조회
+ */
+export const deviceApiGetAllDeviceConfigs = (
+    deviceId: string,
+    deviceFunctionId: string,
+ options?: SecondParameter<typeof farmfarmAxiosInstance>,signal?: AbortSignal
+) => {
+      
+      
+      return farmfarmAxiosInstance<GetAllDeviceConfigsResponse[]>(
+      {url: `/v1/devices/${deviceId}/functions/${deviceFunctionId}/configs`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+export const getDeviceApiGetAllDeviceConfigsQueryKey = (deviceId: string,
+    deviceFunctionId: string,) => {
+    return [`/v1/devices/${deviceId}/functions/${deviceFunctionId}/configs`] as const;
+    }
+
+    
+export const getDeviceApiGetAllDeviceConfigsInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>>, TError = ErrorType<unknown>>(deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getDeviceApiGetAllDeviceConfigsQueryKey(deviceId,deviceFunctionId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>> = ({ signal }) => deviceApiGetAllDeviceConfigs(deviceId,deviceFunctionId, requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(deviceId && deviceFunctionId),  staleTime: 10000,  ...queryOptions} as UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type DeviceApiGetAllDeviceConfigsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>>
+export type DeviceApiGetAllDeviceConfigsInfiniteQueryError = ErrorType<unknown>
+
+
+export function useDeviceApiGetAllDeviceConfigsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>>, TError = ErrorType<unknown>>(
+ deviceId: string,
+    deviceFunctionId: string, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useDeviceApiGetAllDeviceConfigsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>>, TError = ErrorType<unknown>>(
+ deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useDeviceApiGetAllDeviceConfigsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>>, TError = ErrorType<unknown>>(
+ deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 장치 설정 전체 조회
+ */
+
+export function useDeviceApiGetAllDeviceConfigsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>>, TError = ErrorType<unknown>>(
+ deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getDeviceApiGetAllDeviceConfigsInfiniteQueryOptions(deviceId,deviceFunctionId,options)
+
+  const query = useInfiniteQuery(queryOptions) as  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+/**
+ * @summary 장치 설정 전체 조회
+ */
+export const prefetchDeviceApiGetAllDeviceConfigsInfinite = async <TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError = ErrorType<unknown>>(
+ queryClient: QueryClient, deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ): Promise<QueryClient> => {
+
+  const queryOptions = getDeviceApiGetAllDeviceConfigsInfiniteQueryOptions(deviceId,deviceFunctionId,options)
+
+  await queryClient.prefetchInfiniteQuery(queryOptions);
+
+  return queryClient;
+}
+
+
+export const getDeviceApiGetAllDeviceConfigsQueryOptions = <TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError = ErrorType<unknown>>(deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getDeviceApiGetAllDeviceConfigsQueryKey(deviceId,deviceFunctionId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>> = ({ signal }) => deviceApiGetAllDeviceConfigs(deviceId,deviceFunctionId, requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(deviceId && deviceFunctionId),  staleTime: 10000,  ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type DeviceApiGetAllDeviceConfigsQueryResult = NonNullable<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>>
+export type DeviceApiGetAllDeviceConfigsQueryError = ErrorType<unknown>
+
+
+export function useDeviceApiGetAllDeviceConfigs<TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError = ErrorType<unknown>>(
+ deviceId: string,
+    deviceFunctionId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useDeviceApiGetAllDeviceConfigs<TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError = ErrorType<unknown>>(
+ deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useDeviceApiGetAllDeviceConfigs<TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError = ErrorType<unknown>>(
+ deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary 장치 설정 전체 조회
+ */
+
+export function useDeviceApiGetAllDeviceConfigs<TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError = ErrorType<unknown>>(
+ deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getDeviceApiGetAllDeviceConfigsQueryOptions(deviceId,deviceFunctionId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+/**
+ * @summary 장치 설정 전체 조회
+ */
+export const prefetchDeviceApiGetAllDeviceConfigs = async <TData = Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError = ErrorType<unknown>>(
+ queryClient: QueryClient, deviceId: string,
+    deviceFunctionId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof deviceApiGetAllDeviceConfigs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+
+  ): Promise<QueryClient> => {
+
+  const queryOptions = getDeviceApiGetAllDeviceConfigsQueryOptions(deviceId,deviceFunctionId,options)
+
+  await queryClient.prefetchQuery(queryOptions);
+
+  return queryClient;
+}
+
+
+/**
+ * @summary 장치 설정 생성
+ */
+export const deviceApiCreateDeviceConfig = (
+    deviceId: string,
+    deviceFunctionId: string,
+    createDeviceConfigRequest: BodyType<CreateDeviceConfigRequest>,
+ options?: SecondParameter<typeof farmfarmAxiosInstance>,signal?: AbortSignal
+) => {
+      
+      
+      return farmfarmAxiosInstance<string>(
+      {url: `/v1/devices/${deviceId}/functions/${deviceFunctionId}/configs`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: createDeviceConfigRequest, signal
+    },
+      options);
+    }
+  
+
+
+export const getDeviceApiCreateDeviceConfigMutationOptions = <TData = Awaited<ReturnType<typeof deviceApiCreateDeviceConfig>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{deviceId: string;deviceFunctionId: string;data: BodyType<CreateDeviceConfigRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+) => {
+const mutationKey = ['deviceApiCreateDeviceConfig'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deviceApiCreateDeviceConfig>>, {deviceId: string;deviceFunctionId: string;data: BodyType<CreateDeviceConfigRequest>}> = (props) => {
+          const {deviceId,deviceFunctionId,data} = props ?? {};
+
+          return  deviceApiCreateDeviceConfig(deviceId,deviceFunctionId,data,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions } as UseMutationOptions<TData, TError,{deviceId: string;deviceFunctionId: string;data: BodyType<CreateDeviceConfigRequest>}, TContext>}
+
+    export type DeviceApiCreateDeviceConfigMutationResult = NonNullable<Awaited<ReturnType<typeof deviceApiCreateDeviceConfig>>>
+    export type DeviceApiCreateDeviceConfigMutationBody = BodyType<CreateDeviceConfigRequest>
+    export type DeviceApiCreateDeviceConfigMutationError = ErrorType<unknown>
+
+    /**
+ * @summary 장치 설정 생성
+ */
+export const useDeviceApiCreateDeviceConfig = <TData = Awaited<ReturnType<typeof deviceApiCreateDeviceConfig>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{deviceId: string;deviceFunctionId: string;data: BodyType<CreateDeviceConfigRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+): UseMutationResult<
+        TData,
+        TError,
+        {deviceId: string;deviceFunctionId: string;data: BodyType<CreateDeviceConfigRequest>},
+        TContext
+      > => {
+
+      const mutationOptions = getDeviceApiCreateDeviceConfigMutationOptions(options);
 
       return useMutation(mutationOptions);
     }
@@ -609,6 +1121,129 @@ export const useDeviceApiUpdateDevice = <TData = Awaited<ReturnType<typeof devic
       > => {
 
       const mutationOptions = getDeviceApiUpdateDeviceMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    /**
+ * @summary 장치 기능 삭제
+ */
+export const deviceApiDeleteDeviceFunction = (
+    deviceId: string,
+    deviceFunctionId: string,
+ options?: SecondParameter<typeof farmfarmAxiosInstance>,) => {
+      
+      
+      return farmfarmAxiosInstance<void>(
+      {url: `/v1/devices/${deviceId}/functions/${deviceFunctionId}`, method: 'DELETE'
+    },
+      options);
+    }
+  
+
+
+export const getDeviceApiDeleteDeviceFunctionMutationOptions = <TData = Awaited<ReturnType<typeof deviceApiDeleteDeviceFunction>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{deviceId: string;deviceFunctionId: string}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+) => {
+const mutationKey = ['deviceApiDeleteDeviceFunction'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deviceApiDeleteDeviceFunction>>, {deviceId: string;deviceFunctionId: string}> = (props) => {
+          const {deviceId,deviceFunctionId} = props ?? {};
+
+          return  deviceApiDeleteDeviceFunction(deviceId,deviceFunctionId,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions } as UseMutationOptions<TData, TError,{deviceId: string;deviceFunctionId: string}, TContext>}
+
+    export type DeviceApiDeleteDeviceFunctionMutationResult = NonNullable<Awaited<ReturnType<typeof deviceApiDeleteDeviceFunction>>>
+    
+    export type DeviceApiDeleteDeviceFunctionMutationError = ErrorType<unknown>
+
+    /**
+ * @summary 장치 기능 삭제
+ */
+export const useDeviceApiDeleteDeviceFunction = <TData = Awaited<ReturnType<typeof deviceApiDeleteDeviceFunction>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{deviceId: string;deviceFunctionId: string}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+): UseMutationResult<
+        TData,
+        TError,
+        {deviceId: string;deviceFunctionId: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeviceApiDeleteDeviceFunctionMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    /**
+ * @summary 장치 설정 삭제
+ */
+export const deviceApiDeleteDeviceConfig = (
+    deviceId: string,
+    deviceFunctionId: string,
+    deviceConfigId: string,
+ options?: SecondParameter<typeof farmfarmAxiosInstance>,) => {
+      
+      
+      return farmfarmAxiosInstance<void>(
+      {url: `/v1/devices/${deviceId}/functions/${deviceFunctionId}/configs/${deviceConfigId}`, method: 'DELETE'
+    },
+      options);
+    }
+  
+
+
+export const getDeviceApiDeleteDeviceConfigMutationOptions = <TData = Awaited<ReturnType<typeof deviceApiDeleteDeviceConfig>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{deviceId: string;deviceFunctionId: string;deviceConfigId: string}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+) => {
+const mutationKey = ['deviceApiDeleteDeviceConfig'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deviceApiDeleteDeviceConfig>>, {deviceId: string;deviceFunctionId: string;deviceConfigId: string}> = (props) => {
+          const {deviceId,deviceFunctionId,deviceConfigId} = props ?? {};
+
+          return  deviceApiDeleteDeviceConfig(deviceId,deviceFunctionId,deviceConfigId,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions } as UseMutationOptions<TData, TError,{deviceId: string;deviceFunctionId: string;deviceConfigId: string}, TContext>}
+
+    export type DeviceApiDeleteDeviceConfigMutationResult = NonNullable<Awaited<ReturnType<typeof deviceApiDeleteDeviceConfig>>>
+    
+    export type DeviceApiDeleteDeviceConfigMutationError = ErrorType<unknown>
+
+    /**
+ * @summary 장치 설정 삭제
+ */
+export const useDeviceApiDeleteDeviceConfig = <TData = Awaited<ReturnType<typeof deviceApiDeleteDeviceConfig>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{deviceId: string;deviceFunctionId: string;deviceConfigId: string}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+): UseMutationResult<
+        TData,
+        TError,
+        {deviceId: string;deviceFunctionId: string;deviceConfigId: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeviceApiDeleteDeviceConfigMutationOptions(options);
 
       return useMutation(mutationOptions);
     }

@@ -29,15 +29,25 @@
 
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateDeviceRequestType } from './updateDeviceRequestType';
+import type { GetAllDongDevicesResponseDeviceFunctionProtocol } from './getAllDongDevicesResponseDeviceFunctionProtocol';
+import type { GetAllDongDevicesResponseDeviceFunctionType } from './getAllDongDevicesResponseDeviceFunctionType';
+import type { GetAllDongDevicesResponseDeviceConfig } from './getAllDongDevicesResponseDeviceConfig';
 
-export interface UpdateDeviceRequest {
+export interface GetAllDongDevicesResponseDeviceFunction {
+  id?: string;
   name?: string;
-  /** 장치 종류
+  /** 통신 규칙
 
-- DT001: 릴레이
-- DT002: 센서
-- DT003: CCTV
+- CP001: MODBUS_RTU
+- CP002: MODBUS_TCP
+- CP003: HTTP
+- CP004: 1-WIRE
  */
-  type?: UpdateDeviceRequestType;
+  protocol?: GetAllDongDevicesResponseDeviceFunctionProtocol;
+  /** 장치 기능 타입
+- DU001: 읽기
+- DU002: 쓰기
+ */
+  type?: GetAllDongDevicesResponseDeviceFunctionType;
+  configs?: GetAllDongDevicesResponseDeviceConfig[];
 }

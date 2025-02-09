@@ -29,15 +29,16 @@
 
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateDeviceRequestType } from './updateDeviceRequestType';
 
-export interface UpdateDeviceRequest {
-  name?: string;
-  /** 장치 종류
+/**
+ * 장치 설정 키
+- DK001: URL
 
-- DT001: 릴레이
-- DT002: 센서
-- DT003: CCTV
  */
-  type?: UpdateDeviceRequestType;
-}
+export type GetAllDongDevicesResponseDeviceConfigKey = typeof GetAllDongDevicesResponseDeviceConfigKey[keyof typeof GetAllDongDevicesResponseDeviceConfigKey];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const GetAllDongDevicesResponseDeviceConfigKey = {
+  DK001: 'DK001',
+} as const;
