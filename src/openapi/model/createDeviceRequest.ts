@@ -26,7 +26,15 @@
 
  * OpenAPI spec version: 1.0.0
  */
+import type { CreateDeviceRequestType } from './createDeviceRequestType';
 
 export interface CreateDeviceRequest {
   name: string;
+  /** 장치 종류
+
+- DT001: 릴레이
+- DT002: 센서
+- DT003: CCTV
+ */
+  type: CreateDeviceRequestType;
 }

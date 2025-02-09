@@ -26,10 +26,18 @@
 
  * OpenAPI spec version: 1.0.0
  */
+import type { SearchDevicesResponseType } from './searchDevicesResponseType';
 
 export interface SearchDevicesResponse {
   id?: string;
   name?: string;
+  /** 장치 종류
+
+- DT001: 릴레이
+- DT002: 센서
+- DT003: CCTV
+ */
+  type?: SearchDevicesResponseType;
   createdAt?: string;
   updatedAt?: string;
 }

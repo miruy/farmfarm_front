@@ -51,8 +51,8 @@ const Dongs = ({houseId}: { houseId: string }) => {
     }
 
     return (
-        <div className="flex flex-1 pt-5">
-            <div className="flex flex-col w-full mx-auto py-5 px-4 lg:px-[10%]">
+        <div className="flex lg:w-[70%] pt-5">
+            <div className="flex flex-col w-full py-5 px-4">
                 <div className="text-center text-2xl font-bold pb-5 tracking-wide">{house?.name}</div>
 
                 <Table>

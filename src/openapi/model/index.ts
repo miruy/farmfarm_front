@@ -28,6 +28,7 @@
  */
 
 export * from './createDeviceRequest';
+export * from './createDeviceRequestType';
 export * from './createDongDeviceRequest';
 export * from './createDongRequest';
 export * from './createHouseDeviceRequest';
@@ -42,6 +43,7 @@ export * from './getAllDongDevicesResponse';
 export * from './getAllDongDevicesResponseDevice';
 export * from './getAllHouseDevicesResponse';
 export * from './getAllHouseDevicesResponseDevice';
+export * from './getAllHouseDevicesResponseDeviceType';
 export * from './getDeviceByIdResponse';
 export * from './getDongByIdResponse';
 export * from './getHouseByIdResponse';
@@ -51,8 +53,10 @@ export * from './pageRsSearchDevicesResponse';
 export * from './pageRsSearchDongsResponse';
 export * from './pageRsSearchHousesResponse';
 export * from './searchDevicesResponse';
+export * from './searchDevicesResponseType';
 export * from './searchDongsResponse';
 export * from './searchHousesResponse';
 export * from './updateDeviceRequest';
+export * from './updateDeviceRequestType';
 export * from './updateDongRequest';
 export * from './updateHouseRequest';

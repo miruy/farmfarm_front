@@ -1,6 +1,5 @@
-import TopBar from "@/components/common/TopBar";
 import ControlButton from "@/components/common/ControlButton";
-import ControlModal from "@/components/common/ControlModal";
+import ControlSheetForDesktop from "@/components/common/ControlSheetForDesktop";
 
 export default function DongsLayout({
                                         children,
@@ -10,8 +9,9 @@ export default function DongsLayout({
     return (
         <>
             {children}
+
             <ControlButton/>
-            <ControlModal/>
+            <ControlSheetForDesktop/>
         </>
     );
 }
