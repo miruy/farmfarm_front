@@ -26,8 +26,9 @@
 
  * OpenAPI spec version: 1.0.0
  */
+import type { GetAllDongDevicesResponseDevice } from './getAllDongDevicesResponseDevice';
 
-export interface CreateDongRequest {
-  houseId: string;
-  name: string;
+export interface GetAllDongDevicesResponse {
+  id?: string;
+  device?: GetAllDongDevicesResponseDevice;
 }

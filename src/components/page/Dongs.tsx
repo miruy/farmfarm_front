@@ -7,9 +7,10 @@ import {
     TableRow
 } from "@/components/ui/table";
 import {useRouter} from "next/navigation";
-import {useHouseApiGetAllDongs, useHouseApiGetHouseById} from "@/openapi/api/house/house";
+import {useHouseApiGetHouseById} from "@/openapi/api/house/house";
 import Loading from "@/app/loading";
 import NotFound from "@/app/not-found";
+import {useDongApiSearchDongs} from "@/openapi/api/dong/dong";
 
 const Dongs = ({houseId}: { houseId: string }) => {
 
@@ -27,7 +28,11 @@ const Dongs = ({houseId}: { houseId: string }) => {
         data: dongs,
         isLoading: isLoading,
         isError: isError,
-    } = useHouseApiGetAllDongs(houseId, {
+    } = useDongApiSearchDongs({
+        page: 0,
+        pageSize: 10,
+        houseIds: [houseId]
+    }, {
         query: {
             queryKey: ['SearchDongs'],
         },
@@ -52,7 +57,7 @@ const Dongs = ({houseId}: { houseId: string }) => {
 
                 <Table>
                     <TableBody className="cursor-default">
-                        {dongs?.map((dong, index) => (
+                        {dongs?.data?.map((dong, index) => (
                             <TableRow
                                 key={index}
                                 className="flex justify-center cursor-pointer"

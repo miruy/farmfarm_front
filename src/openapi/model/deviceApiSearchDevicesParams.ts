@@ -18,13 +18,22 @@
 - ERROR_1005: 동을 찾을 수 없습니다.
 - ERROR_1006: loginId, password가 null입니다.
 - ERROR_1007: refresh token이 null입니다.
+- ERROR_1008: 장치를 찾을 수 없습니다.
+- ERROR_1009: 이미 동에 포함된 장치입니다.
+- ERROR_1010: 동 장치를 찾을 수 없습니다.
+- ERROR_1011: 이미 하우스에 포함된 장치입니다.
+- ERROR_1012: 하우스 장치를 찾을 수 없습니다.
 
  * OpenAPI spec version: 1.0.0
  */
 
-export interface GetAllDongsResponse {
-  id?: string;
-  name?: string;
-  createdAt?: string;
-  updatedAt?: string;
-}
+export type DeviceApiSearchDevicesParams = {
+/**
+ * 페이지
+ */
+page?: number;
+/**
+ * 페이지 크기
+ */
+pageSize?: number;
+};

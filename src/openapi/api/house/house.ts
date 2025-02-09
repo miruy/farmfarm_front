@@ -18,6 +18,11 @@
 - ERROR_1005: 동을 찾을 수 없습니다.
 - ERROR_1006: loginId, password가 null입니다.
 - ERROR_1007: refresh token이 null입니다.
+- ERROR_1008: 장치를 찾을 수 없습니다.
+- ERROR_1009: 이미 동에 포함된 장치입니다.
+- ERROR_1010: 동 장치를 찾을 수 없습니다.
+- ERROR_1011: 이미 하우스에 포함된 장치입니다.
+- ERROR_1012: 하우스 장치를 찾을 수 없습니다.
 
  * OpenAPI spec version: 1.0.0
  */
@@ -45,13 +50,12 @@ import type {
   UseQueryResult
 } from '@tanstack/react-query'
 import type {
-  CreateDongRequest,
+  CreateHouseDeviceRequest,
   CreateHouseRequest,
-  GetAllDongsResponse,
+  GetAllHouseDevicesResponse,
   GetHouseByIdResponse,
   HouseApiSearchHousesParams,
   PageRsSearchHousesResponse,
-  UpdateDongRequest,
   UpdateHouseRequest
 } from '../../model'
 import { farmfarmAxiosInstance } from '../../../axios/axios_instance';
@@ -307,82 +311,82 @@ export const useHouseApiCreateHouse = <TData = Awaited<ReturnType<typeof houseAp
       return useMutation(mutationOptions);
     }
     /**
- * @summary 동 전체조회
+ * @summary 하우스 장치 전체 조회
  */
-export const houseApiGetAllDongs = (
+export const houseApiGetAllHouseDevices = (
     houseId: string,
  options?: SecondParameter<typeof farmfarmAxiosInstance>,signal?: AbortSignal
 ) => {
       
       
-      return farmfarmAxiosInstance<GetAllDongsResponse[]>(
-      {url: `/v1/houses/${houseId}/dongs`, method: 'GET', signal
+      return farmfarmAxiosInstance<GetAllHouseDevicesResponse[]>(
+      {url: `/v1/houses/${houseId}/devices`, method: 'GET', signal
     },
       options);
     }
   
 
-export const getHouseApiGetAllDongsQueryKey = (houseId: string,) => {
-    return [`/v1/houses/${houseId}/dongs`] as const;
+export const getHouseApiGetAllHouseDevicesQueryKey = (houseId: string,) => {
+    return [`/v1/houses/${houseId}/devices`] as const;
     }
 
     
-export const getHouseApiGetAllDongsInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllDongs>>>, TError = ErrorType<unknown>>(houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export const getHouseApiGetAllHouseDevicesInfiniteQueryOptions = <TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>>, TError = ErrorType<unknown>>(houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getHouseApiGetAllDongsQueryKey(houseId);
+  const queryKey =  queryOptions?.queryKey ?? getHouseApiGetAllHouseDevicesQueryKey(houseId);
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof houseApiGetAllDongs>>> = ({ signal }) => houseApiGetAllDongs(houseId, requestOptions, signal);
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>> = ({ signal }) => houseApiGetAllHouseDevices(houseId, requestOptions, signal);
 
       
 
       
 
-   return  { queryKey, queryFn, enabled: !!(houseId),  staleTime: 10000,  ...queryOptions} as UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+   return  { queryKey, queryFn, enabled: !!(houseId),  staleTime: 10000,  ...queryOptions} as UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type HouseApiGetAllDongsInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof houseApiGetAllDongs>>>
-export type HouseApiGetAllDongsInfiniteQueryError = ErrorType<unknown>
+export type HouseApiGetAllHouseDevicesInfiniteQueryResult = NonNullable<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>>
+export type HouseApiGetAllHouseDevicesInfiniteQueryError = ErrorType<unknown>
 
 
-export function useHouseApiGetAllDongsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllDongs>>>, TError = ErrorType<unknown>>(
- houseId: string, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>> & Pick<
+export function useHouseApiGetAllHouseDevicesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>>, TError = ErrorType<unknown>>(
+ houseId: string, options: { query:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof houseApiGetAllDongs>>,
+          Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>,
           TError,
           TData
         > , 'initialData'
       >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ):  DefinedUseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useHouseApiGetAllDongsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllDongs>>>, TError = ErrorType<unknown>>(
- houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>> & Pick<
+export function useHouseApiGetAllHouseDevicesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>>, TError = ErrorType<unknown>>(
+ houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof houseApiGetAllDongs>>,
+          Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>,
           TError,
           TData
         > , 'initialData'
       >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useHouseApiGetAllDongsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllDongs>>>, TError = ErrorType<unknown>>(
- houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export function useHouseApiGetAllHouseDevicesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>>, TError = ErrorType<unknown>>(
+ houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
- * @summary 동 전체조회
+ * @summary 하우스 장치 전체 조회
  */
 
-export function useHouseApiGetAllDongsInfinite<TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllDongs>>>, TError = ErrorType<unknown>>(
- houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export function useHouseApiGetAllHouseDevicesInfinite<TData = InfiniteData<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>>, TError = ErrorType<unknown>>(
+ houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ):  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const queryOptions = getHouseApiGetAllDongsInfiniteQueryOptions(houseId,options)
+  const queryOptions = getHouseApiGetAllHouseDevicesInfiniteQueryOptions(houseId,options)
 
   const query = useInfiniteQuery(queryOptions) as  UseInfiniteQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
@@ -392,14 +396,14 @@ export function useHouseApiGetAllDongsInfinite<TData = InfiniteData<Awaited<Retu
 }
 
 /**
- * @summary 동 전체조회
+ * @summary 하우스 장치 전체 조회
  */
-export const prefetchHouseApiGetAllDongsInfinite = async <TData = Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError = ErrorType<unknown>>(
- queryClient: QueryClient, houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export const prefetchHouseApiGetAllHouseDevicesInfinite = async <TData = Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError = ErrorType<unknown>>(
+ queryClient: QueryClient, houseId: string, options?: { query?:Partial<UseInfiniteQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ): Promise<QueryClient> => {
 
-  const queryOptions = getHouseApiGetAllDongsInfiniteQueryOptions(houseId,options)
+  const queryOptions = getHouseApiGetAllHouseDevicesInfiniteQueryOptions(houseId,options)
 
   await queryClient.prefetchInfiniteQuery(queryOptions);
 
@@ -407,62 +411,62 @@ export const prefetchHouseApiGetAllDongsInfinite = async <TData = Awaited<Return
 }
 
 
-export const getHouseApiGetAllDongsQueryOptions = <TData = Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError = ErrorType<unknown>>(houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export const getHouseApiGetAllHouseDevicesQueryOptions = <TData = Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError = ErrorType<unknown>>(houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getHouseApiGetAllDongsQueryKey(houseId);
+  const queryKey =  queryOptions?.queryKey ?? getHouseApiGetAllHouseDevicesQueryKey(houseId);
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof houseApiGetAllDongs>>> = ({ signal }) => houseApiGetAllDongs(houseId, requestOptions, signal);
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>> = ({ signal }) => houseApiGetAllHouseDevices(houseId, requestOptions, signal);
 
       
 
       
 
-   return  { queryKey, queryFn, enabled: !!(houseId),  staleTime: 10000,  ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+   return  { queryKey, queryFn, enabled: !!(houseId),  staleTime: 10000,  ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type HouseApiGetAllDongsQueryResult = NonNullable<Awaited<ReturnType<typeof houseApiGetAllDongs>>>
-export type HouseApiGetAllDongsQueryError = ErrorType<unknown>
+export type HouseApiGetAllHouseDevicesQueryResult = NonNullable<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>>
+export type HouseApiGetAllHouseDevicesQueryError = ErrorType<unknown>
 
 
-export function useHouseApiGetAllDongs<TData = Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError = ErrorType<unknown>>(
- houseId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>> & Pick<
+export function useHouseApiGetAllHouseDevices<TData = Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError = ErrorType<unknown>>(
+ houseId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof houseApiGetAllDongs>>,
+          Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>,
           TError,
           TData
         > , 'initialData'
       >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useHouseApiGetAllDongs<TData = Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError = ErrorType<unknown>>(
- houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>> & Pick<
+export function useHouseApiGetAllHouseDevices<TData = Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError = ErrorType<unknown>>(
+ houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof houseApiGetAllDongs>>,
+          Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>,
           TError,
           TData
         > , 'initialData'
       >, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useHouseApiGetAllDongs<TData = Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError = ErrorType<unknown>>(
- houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export function useHouseApiGetAllHouseDevices<TData = Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError = ErrorType<unknown>>(
+ houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
- * @summary 동 전체조회
+ * @summary 하우스 장치 전체 조회
  */
 
-export function useHouseApiGetAllDongs<TData = Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError = ErrorType<unknown>>(
- houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export function useHouseApiGetAllHouseDevices<TData = Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError = ErrorType<unknown>>(
+ houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const queryOptions = getHouseApiGetAllDongsQueryOptions(houseId,options)
+  const queryOptions = getHouseApiGetAllHouseDevicesQueryOptions(houseId,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 
@@ -472,14 +476,14 @@ export function useHouseApiGetAllDongs<TData = Awaited<ReturnType<typeof houseAp
 }
 
 /**
- * @summary 동 전체조회
+ * @summary 하우스 장치 전체 조회
  */
-export const prefetchHouseApiGetAllDongs = async <TData = Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError = ErrorType<unknown>>(
- queryClient: QueryClient, houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllDongs>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export const prefetchHouseApiGetAllHouseDevices = async <TData = Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError = ErrorType<unknown>>(
+ queryClient: QueryClient, houseId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof houseApiGetAllHouseDevices>>, TError, TData>>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 
   ): Promise<QueryClient> => {
 
-  const queryOptions = getHouseApiGetAllDongsQueryOptions(houseId,options)
+  const queryOptions = getHouseApiGetAllHouseDevicesQueryOptions(houseId,options)
 
   await queryClient.prefetchQuery(queryOptions);
 
@@ -488,29 +492,29 @@ export const prefetchHouseApiGetAllDongs = async <TData = Awaited<ReturnType<typ
 
 
 /**
- * @summary 동 생성
+ * @summary 하우스 장치 생성
  */
-export const houseApiCreateDong = (
+export const houseApiCreateHouseDevice = (
     houseId: string,
-    createDongRequest: BodyType<CreateDongRequest>,
+    createHouseDeviceRequest: BodyType<CreateHouseDeviceRequest>,
  options?: SecondParameter<typeof farmfarmAxiosInstance>,signal?: AbortSignal
 ) => {
       
       
       return farmfarmAxiosInstance<string>(
-      {url: `/v1/houses/${houseId}/dongs`, method: 'POST',
+      {url: `/v1/houses/${houseId}/devices`, method: 'POST',
       headers: {'Content-Type': 'application/json', },
-      data: createDongRequest, signal
+      data: createHouseDeviceRequest, signal
     },
       options);
     }
   
 
 
-export const getHouseApiCreateDongMutationOptions = <TData = Awaited<ReturnType<typeof houseApiCreateDong>>, TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;data: BodyType<CreateDongRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export const getHouseApiCreateHouseDeviceMutationOptions = <TData = Awaited<ReturnType<typeof houseApiCreateHouseDevice>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;data: BodyType<CreateHouseDeviceRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 ) => {
-const mutationKey = ['houseApiCreateDong'];
+const mutationKey = ['houseApiCreateHouseDevice'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -520,34 +524,34 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof houseApiCreateDong>>, {houseId: string;data: BodyType<CreateDongRequest>}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof houseApiCreateHouseDevice>>, {houseId: string;data: BodyType<CreateHouseDeviceRequest>}> = (props) => {
           const {houseId,data} = props ?? {};
 
-          return  houseApiCreateDong(houseId,data,requestOptions)
+          return  houseApiCreateHouseDevice(houseId,data,requestOptions)
         }
 
         
 
 
-  return  { mutationFn, ...mutationOptions } as UseMutationOptions<TData, TError,{houseId: string;data: BodyType<CreateDongRequest>}, TContext>}
+  return  { mutationFn, ...mutationOptions } as UseMutationOptions<TData, TError,{houseId: string;data: BodyType<CreateHouseDeviceRequest>}, TContext>}
 
-    export type HouseApiCreateDongMutationResult = NonNullable<Awaited<ReturnType<typeof houseApiCreateDong>>>
-    export type HouseApiCreateDongMutationBody = BodyType<CreateDongRequest>
-    export type HouseApiCreateDongMutationError = ErrorType<unknown>
+    export type HouseApiCreateHouseDeviceMutationResult = NonNullable<Awaited<ReturnType<typeof houseApiCreateHouseDevice>>>
+    export type HouseApiCreateHouseDeviceMutationBody = BodyType<CreateHouseDeviceRequest>
+    export type HouseApiCreateHouseDeviceMutationError = ErrorType<unknown>
 
     /**
- * @summary 동 생성
+ * @summary 하우스 장치 생성
  */
-export const useHouseApiCreateDong = <TData = Awaited<ReturnType<typeof houseApiCreateDong>>, TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;data: BodyType<CreateDongRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export const useHouseApiCreateHouseDevice = <TData = Awaited<ReturnType<typeof houseApiCreateHouseDevice>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;data: BodyType<CreateHouseDeviceRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 ): UseMutationResult<
         TData,
         TError,
-        {houseId: string;data: BodyType<CreateDongRequest>},
+        {houseId: string;data: BodyType<CreateHouseDeviceRequest>},
         TContext
       > => {
 
-      const mutationOptions = getHouseApiCreateDongMutationOptions(options);
+      const mutationOptions = getHouseApiCreateHouseDeviceMutationOptions(options);
 
       return useMutation(mutationOptions);
     }
@@ -856,26 +860,26 @@ export const useHouseApiUpdateHouse = <TData = Awaited<ReturnType<typeof houseAp
       return useMutation(mutationOptions);
     }
     /**
- * @summary 동 삭제
+ * @summary 하우스 장치 삭제
  */
-export const houseApiDeleteDong = (
+export const houseApiDeleteHouseDevice = (
     houseId: string,
-    dongId: string,
+    houseDeviceId: string,
  options?: SecondParameter<typeof farmfarmAxiosInstance>,) => {
       
       
       return farmfarmAxiosInstance<void>(
-      {url: `/v1/houses/${houseId}/dongs/${dongId}`, method: 'DELETE'
+      {url: `/v1/houses/${houseId}/devices/${houseDeviceId}`, method: 'DELETE'
     },
       options);
     }
   
 
 
-export const getHouseApiDeleteDongMutationOptions = <TData = Awaited<ReturnType<typeof houseApiDeleteDong>>, TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;dongId: string}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export const getHouseApiDeleteHouseDeviceMutationOptions = <TData = Awaited<ReturnType<typeof houseApiDeleteHouseDevice>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;houseDeviceId: string}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 ) => {
-const mutationKey = ['houseApiDeleteDong'];
+const mutationKey = ['houseApiDeleteHouseDevice'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -885,98 +889,34 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof houseApiDeleteDong>>, {houseId: string;dongId: string}> = (props) => {
-          const {houseId,dongId} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof houseApiDeleteHouseDevice>>, {houseId: string;houseDeviceId: string}> = (props) => {
+          const {houseId,houseDeviceId} = props ?? {};
 
-          return  houseApiDeleteDong(houseId,dongId,requestOptions)
+          return  houseApiDeleteHouseDevice(houseId,houseDeviceId,requestOptions)
         }
 
         
 
 
-  return  { mutationFn, ...mutationOptions } as UseMutationOptions<TData, TError,{houseId: string;dongId: string}, TContext>}
+  return  { mutationFn, ...mutationOptions } as UseMutationOptions<TData, TError,{houseId: string;houseDeviceId: string}, TContext>}
 
-    export type HouseApiDeleteDongMutationResult = NonNullable<Awaited<ReturnType<typeof houseApiDeleteDong>>>
+    export type HouseApiDeleteHouseDeviceMutationResult = NonNullable<Awaited<ReturnType<typeof houseApiDeleteHouseDevice>>>
     
-    export type HouseApiDeleteDongMutationError = ErrorType<unknown>
+    export type HouseApiDeleteHouseDeviceMutationError = ErrorType<unknown>
 
     /**
- * @summary 동 삭제
+ * @summary 하우스 장치 삭제
  */
-export const useHouseApiDeleteDong = <TData = Awaited<ReturnType<typeof houseApiDeleteDong>>, TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;dongId: string}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
+export const useHouseApiDeleteHouseDevice = <TData = Awaited<ReturnType<typeof houseApiDeleteHouseDevice>>, TError = ErrorType<unknown>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;houseDeviceId: string}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
 ): UseMutationResult<
         TData,
         TError,
-        {houseId: string;dongId: string},
+        {houseId: string;houseDeviceId: string},
         TContext
       > => {
 
-      const mutationOptions = getHouseApiDeleteDongMutationOptions(options);
-
-      return useMutation(mutationOptions);
-    }
-    /**
- * @summary 동 수정
- */
-export const houseApiUpdateDong = (
-    houseId: string,
-    dongId: string,
-    updateDongRequest: BodyType<UpdateDongRequest>,
- options?: SecondParameter<typeof farmfarmAxiosInstance>,) => {
-      
-      
-      return farmfarmAxiosInstance<void>(
-      {url: `/v1/houses/${houseId}/dongs/${dongId}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: updateDongRequest
-    },
-      options);
-    }
-  
-
-
-export const getHouseApiUpdateDongMutationOptions = <TData = Awaited<ReturnType<typeof houseApiUpdateDong>>, TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;dongId: string;data: BodyType<UpdateDongRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
-) => {
-const mutationKey = ['houseApiUpdateDong'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof houseApiUpdateDong>>, {houseId: string;dongId: string;data: BodyType<UpdateDongRequest>}> = (props) => {
-          const {houseId,dongId,data} = props ?? {};
-
-          return  houseApiUpdateDong(houseId,dongId,data,requestOptions)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions } as UseMutationOptions<TData, TError,{houseId: string;dongId: string;data: BodyType<UpdateDongRequest>}, TContext>}
-
-    export type HouseApiUpdateDongMutationResult = NonNullable<Awaited<ReturnType<typeof houseApiUpdateDong>>>
-    export type HouseApiUpdateDongMutationBody = BodyType<UpdateDongRequest>
-    export type HouseApiUpdateDongMutationError = ErrorType<unknown>
-
-    /**
- * @summary 동 수정
- */
-export const useHouseApiUpdateDong = <TData = Awaited<ReturnType<typeof houseApiUpdateDong>>, TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<TData, TError,{houseId: string;dongId: string;data: BodyType<UpdateDongRequest>}, TContext>, request?: SecondParameter<typeof farmfarmAxiosInstance>}
-): UseMutationResult<
-        TData,
-        TError,
-        {houseId: string;dongId: string;data: BodyType<UpdateDongRequest>},
-        TContext
-      > => {
-
-      const mutationOptions = getHouseApiUpdateDongMutationOptions(options);
+      const mutationOptions = getHouseApiDeleteHouseDeviceMutationOptions(options);
 
       return useMutation(mutationOptions);
     }

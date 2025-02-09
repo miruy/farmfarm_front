@@ -26,8 +26,10 @@
 
  * OpenAPI spec version: 1.0.0
  */
+import type { SearchDongsResponse } from './searchDongsResponse';
+import type { PageRsMeta } from './pageRsMeta';
 
-export interface CreateDongRequest {
-  houseId: string;
-  name: string;
+export interface PageRsSearchDongsResponse {
+  data?: SearchDongsResponse[];
+  meta?: PageRsMeta;
 }

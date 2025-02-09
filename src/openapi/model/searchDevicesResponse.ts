@@ -27,7 +27,9 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface CreateDongRequest {
-  houseId: string;
-  name: string;
+export interface SearchDevicesResponse {
+  id?: string;
+  name?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

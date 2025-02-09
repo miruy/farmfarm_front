@@ -27,7 +27,17 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export interface CreateDongRequest {
-  houseId: string;
-  name: string;
-}
+export type DongApiSearchDongsParams = {
+/**
+ * 페이지
+ */
+page?: number;
+/**
+ * 페이지 크기
+ */
+pageSize?: number;
+/**
+ * 하우스 ID 리스트
+ */
+houseIds?: string[];
+};

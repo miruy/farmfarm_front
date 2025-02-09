@@ -2,11 +2,14 @@
 
 import Axios, {AxiosError, AxiosRequestConfig} from 'axios';
 import {importData} from "@/axios/import-data";
-
+import qs from 'qs';
 
 export const FARMFARM_AXIOS_INSTANCE = Axios.create({
     baseURL: importData.NEXT_PUBLIC_FARMFARM_SERVER_URL,
-    withCredentials: true
+    withCredentials: true,
+    paramsSerializer: (params) => {
+        return qs.stringify(params, { arrayFormat: 'repeat' }); // types=VENDOR&types=RETAILER
+    },
 });
 
 export const farmfarmAxiosInstance = <T>(
